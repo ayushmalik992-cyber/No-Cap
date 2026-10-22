@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NoCap — see the real price</title>
+<meta name="description" content="NoCap exposes personalised pricing, drip fees and shrinkflation on Indian shopping apps, then turns it into a complaint in one tap.">
+<meta name="theme-color" content="#121110">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Geist:wght@400..700&family=Geist+Mono:wght@400..600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="nav__inner wrap">
+    <a href="#top" class="logo" aria-label="NoCap home">
+      <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true">
+        <circle class="logo__crimp" cx="16" cy="16" r="13"/>
+        <circle class="logo__cap" cx="16" cy="16" r="9.5"/>
+        <path class="logo__slash" d="M6.5 25.5 L25.5 6.5"/>
+      </svg>
+      <span class="logo__word">NoCap</span>
+    </a>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="navLinks">
+      <span class="nav__toggle-bars" aria-hidden="true"></span><span class="sr-only">Menu</span>
+    </button>
+    <nav id="navLinks" class="nav__links" aria-label="Primary">
+      <a href="#simulator">Simulator</a>
+      <a href="#shrink">Shrinkflation</a>
+      <a href="#heatmap">Fee heatmap</a>
+      <a href="#evidence">File a complaint</a>
+      <a href="#simulator" class="btn btn--ink btn--sm">Try the demo</a>
+    </nav>
+  </div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker" aria-label="Recent fee reports, illustrative">
+  <span class="ticker__badge"><span class="ticker__dot"></span>Live</span>
+  <div class="ticker__track" id="tickerTrack">
+    <span class="ticker__item"><b class="ticker__amt">+₹18</b> handling fee <span class="ticker__where">Indiranagar · 2m ago</span></span>
+    <span class="ticker__item"><b class="ticker__amt">+₹35</b> rain surge <span class="ticker__where">Andheri W · 4m ago</span></span>
+    <span class="ticker__item"><b class="ticker__amt">250g → 185g</b> cream biscuits <span class="ticker__where">same ₹100 MRP</span></span>
+    <span class="ticker__item"><b class="ticker__amt">+₹19</b> pre-ticked insurance <span class="ticker__where">Salt Lake · 6m ago</span></span>
+    <span class="ticker__item"><b class="ticker__amt">+₹25</b> small-cart fee <span class="ticker__where">Koramangala · 7m ago</span></span>
+    <span class="ticker__item"><b class="ticker__amt">₹127 vs ₹100</b> same cart, two phones <span class="ticker__where">Gurugram · 9m ago</span></span>
+    <span class="ticker__item"><b class="ticker__amt">+₹48</b> peak-hour fee <span class="ticker__where">Airport T2 · 11m ago</span></span>
+    <span class="ticker__item"><b class="ticker__amt">+₹12</b> platform fee <span class="ticker__where">Banjara Hills · 12m ago</span></span>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- OPENER: shrinking packet + cracking price tag -->
+<section id="top" class="opener-sec">
+  <h1 class="sr-only">NoCap: see the real price</h1>
+  <div id="opener" class="scrolly scrolly--opener">
+    <div id="openerStage" class="stage stage--opener">
+
+      <div class="heads heads--opener" data-heads>
+        <div class="head"><div class="kicker">Aisle 4 · classic salted chips</div><div class="head__title">₹100. Same as always.</div></div>
+        <div class="head"><div class="kicker">Net weight, quietly edited</div><div class="head__title">The pack shrank. The price <mark>didn’t.</mark></div></div>
+        <div class="head"><div class="kicker">Now check your friend’s phone</div><div class="head__title">And your ₹100 isn’t <span class="is-alert">their ₹100.</span></div></div>
+        <div class="head"><div class="kicker">NoCap · pricing transparency</div><div class="head__title">See the real price. <mark>No cap.</mark></div></div>
+      </div>
+
+      <div class="meter" id="opMeter"><span class="meter__label">per 100g</span><span class="meter__val" id="opUnit">₹40.0</span></div>
+
+      <div class="art-fit" aria-hidden="true">
+        <div class="art">
+          <!-- shelf with neighbouring products -->
+          <div class="shelf" id="opShelf">
+            <svg class="shelf__goods" width="1100" height="200" viewBox="0 0 1100 200">
+              <g class="goods">
+                <rect class="g-c4" x="0" y="96" width="44" height="104" rx="6"/><rect class="g-label" x="0" y="128" width="44" height="30"/>
+                <rect class="g-c2" x="70" y="84" width="56" height="116" rx="9"/><rect class="g-rim" x="74" y="78" width="48" height="10" rx="4"/><rect class="g-label" x="70" y="122" width="56" height="34"/><circle class="g-c2" cx="98" cy="139" r="10"/><rect class="g-shine" x="80" y="90" width="6" height="104" rx="3"/>
+                <rect class="g-c2" x="134" y="84" width="56" height="116" rx="9"/><rect class="g-rim" x="138" y="78" width="48" height="10" rx="4"/><rect class="g-label" x="134" y="122" width="56" height="34"/><circle class="g-c2" cx="162" cy="139" r="10"/><rect class="g-shine" x="144" y="90" width="6" height="104" rx="3"/>
+                <path class="g-c1d" d="M234,34 L340,34 L352,46 L222,46 Z"/><rect class="g-c1" x="222" y="46" width="130" height="154"/><rect class="g-ink" x="222" y="62" width="130" height="26"/><rect class="g-label" x="244" y="110" width="86" height="58" rx="10"/><circle class="g-biscuit" cx="266" cy="139" r="15"/><circle class="g-biscuit" cx="287" cy="139" r="15"/><circle class="g-biscuit" cx="308" cy="139" r="15"/><rect class="g-shine" x="230" y="96" width="5" height="96" rx="2"/>
+                <path class="g-c3" d="M760,52 C752,100 752,160 760,190 L864,190 C872,160 872,100 864,52 Z"/><rect class="g-c3d" x="756" y="40" width="112" height="14" rx="2"/><rect class="g-c3d" x="756" y="186" width="112" height="14" rx="2"/><rect class="g-label" x="760" y="74" width="104" height="22"/><ellipse class="g-biscuit" cx="812" cy="138" rx="32" ry="24"/><rect class="g-shine" x="770" y="58" width="7" height="128" rx="3"/>
+                <rect class="g-ink" x="918" y="70" width="72" height="20" rx="4"/><rect class="g-c4" x="912" y="88" width="84" height="112" rx="18"/><rect class="g-label" x="912" y="122" width="84" height="44"/><rect class="g-shine" x="922" y="98" width="7" height="92" rx="3"/>
+                <rect class="g-c1" x="1020" y="88" width="80" height="112"/><rect class="g-ink" x="1020" y="104" width="80" height="18"/>
+              </g>
+            </svg>
+            <div class="shelf__board">
+              <span class="shelf__label" style="left:130px">₹40</span>
+              <span class="shelf__label" style="left:287px">₹30</span>
+              <span class="shelf__label" style="left:812px">₹20</span>
+              <span class="shelf__label" style="left:954px">₹99</span>
+            </div>
+          </div>
+
+          <!-- packet -->
+          <div class="pack" id="opPack">
+            <svg class="pack__svg" width="300" height="370" viewBox="0 0 300 370">
+              <defs>
+                <linearGradient id="pkBody" x1="0" x2="1" y1="0" y2="0">
+                  <stop offset="0" class="st-pack-dark"/><stop offset=".22" class="st-pack"/><stop offset=".5" class="st-pack-light"/><stop offset=".78" class="st-pack"/><stop offset="1" class="st-pack-dark"/>
+                </linearGradient>
+                <linearGradient id="pkShade" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" class="st-shade" stop-opacity=".45"/><stop offset=".2" class="st-shade" stop-opacity="0"/><stop offset=".8" class="st-shade" stop-opacity="0"/><stop offset="1" class="st-shade" stop-opacity=".5"/>
+                </linearGradient>
+                <linearGradient id="pkChip" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0" class="st-chip-light"/><stop offset=".55" class="st-chip"/><stop offset="1" class="st-chip-dark"/>
+                </linearGradient>
+                <linearGradient id="pkGloss" x1="0" x2="1" y1="0" y2="0">
+                  <stop offset="0" class="st-white" stop-opacity="0"/><stop offset=".5" class="st-white" stop-opacity=".6"/><stop offset="1" class="st-white" stop-opacity="0"/>
+                </linearGradient>
+                <clipPath id="pkClip"><path d="M30,38 C16,120 14,250 28,334 L272,334 C286,250 284,120 270,38 Z"/></clipPath>
+              </defs>
+              <path d="M30,38 C16,120 14,250 28,334 L272,334 C286,250 284,120 270,38 Z" fill="url(#pkBody)"/>
+              <g clip-path="url(#pkClip)">
+                <path class="pk-wave" d="M0,96 C60,70 110,118 160,96 C205,76 250,84 300,100 L300,152 C250,140 205,144 160,160 C110,178 60,132 0,152 Z"/>
+                <path class="pk-wave-accent" d="M0,160 C60,142 110,186 160,168 C205,152 250,154 300,164 L300,172 C250,162 205,162 160,178 C110,196 60,152 0,170 Z"/>
+                <ellipse class="pk-shadow" cx="152" cy="292" rx="74" ry="9"/>
+                <path class="pk-chip" d="M88,232 C92,206 124,194 148,200 C170,206 180,226 174,246 C168,268 136,278 112,272 C92,266 84,252 88,232 Z"/>
+                <path class="pk-chip" d="M152,216 C162,194 196,188 216,200 C234,212 234,238 220,254 C206,270 174,272 160,258 C148,246 144,232 152,216 Z"/>
+                <path class="pk-chip" d="M114,248 C124,230 158,226 180,236 C200,246 202,270 188,284 C172,298 138,298 122,286 C108,276 106,262 114,248 Z"/>
+                <path class="pk-ridge" d="M100,236 Q130,222 164,230 M104,252 Q134,240 166,248 M162,222 Q192,208 222,222 M160,240 Q190,228 222,240 M124,256 Q154,244 188,256 M126,272 Q156,262 186,272"/>
+                <g class="pk-salt"><circle cx="118" cy="226" r="1.8"/><circle cx="140" cy="214" r="1.6"/><circle cx="196" cy="212" r="1.8"/><circle cx="206" cy="236" r="1.6"/><circle cx="176" cy="226" r="1.5"/><circle cx="140" cy="280" r="1.8"/><circle cx="166" cy="266" r="1.6"/><circle cx="132" cy="262" r="1.5"/><circle cx="182" cy="248" r="1.4"/></g>
+                <path d="M52,30 C42,120 42,250 52,340 L76,340 C66,250 66,120 76,30 Z" fill="url(#pkGloss)" opacity=".55"/>
+                <path d="M224,30 C232,120 232,250 224,340 L232,340 C240,250 240,120 232,30 Z" fill="url(#pkGloss)" opacity=".35"/>
+                <rect x="0" y="0" width="300" height="370" fill="url(#pkShade)"/>
+              </g>
+              <path class="pk-crimp" id="crimpTop"/>
+              <path class="pk-crimp" id="crimpBot"/>
+              <path class="pk-ridgeline" id="crimpRidges"/>
+              <g class="pk-wrinkles" id="opWrinkle"><path d="M40,70 Q70,95 52,130"/><path d="M262,80 Q232,110 250,150"/><path d="M60,290 Q95,270 120,300"/><path d="M240,280 Q210,300 186,286"/><path d="M140,60 Q160,80 150,104"/></g>
+            </svg>
+            <div class="pack__top">KETTLE COOKED · SINCE 1998</div>
+            <div class="pack__brand"><span class="pack__name">Saltwave</span><span class="pack__flavour">CLASSIC SALTED</span></div>
+            <div class="pack__wt">NET WT <span id="opWt">250g</span></div>
+            <div class="pack__sticker" id="opSticker"><span>NEW<br>LOOK!</span></div>
+          </div>
+
+          <!-- annotations (desktop) -->
+          <div class="callout callout--left" id="opCallL">
+            <div class="callout__k">Net weight</div>
+            <div class="callout__v"><span id="opCallWt">250g</span><s id="opCallWas">250g</s></div>
+            <div class="callout__bar"><i id="opCallBar"></i></div>
+            <div class="callout__d" id="opCallDelta">Last year’s pack</div>
+          </div>
+          <div class="callout callout--right" id="opCallR">
+            <div class="callout__k">You pay per 100g</div>
+            <div class="callout__v" id="opCallUnit">₹40.0</div>
+            <div class="callout__bar"><i id="opCallUnitBar"></i></div>
+            <div class="callout__d" id="opCallPct">MRP ₹100 · unchanged</div>
+          </div>
+
+          <!-- string -->
+          <div class="string" id="opString"></div>
+          <!-- price tag -->
+          <div class="tag" id="opTag">
+            <div class="half" data-half>
+              <span class="half__hole"></span>
+              <div class="face face--old"><div class="face__price">₹100</div><div class="face__note">MRP · inclusive of all taxes</div></div>
+              <div class="face face--new"><div class="face__price">₹100</div><div class="face__who">Their phone</div><div class="face__note">Mid-range · 85% battery</div></div>
+            </div>
+            <div class="half half--you" data-half>
+              <span class="half__hole"></span>
+              <div class="face face--old"><div class="face__price">₹100</div><div class="face__note">MRP · inclusive of all taxes</div></div>
+              <div class="face face--new"><div class="face__price">₹127</div><div class="face__who">Your phone</div><div class="face__note">Flagship · 9% battery</div></div>
+            </div>
+            <svg class="crack" id="opCrack" viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="52,0 46,25 54,50 47,75 50,100" vector-effect="non-scaling-stroke"/></svg>
+          </div>
+
+          <!-- end state -->
+          <div class="delta" id="opDelta"><b>+₹27</b><small>same pack</small></div>
+          <div class="stats" id="opStats">
+            <div class="stat"><b class="is-alert">+₹27</b><span>quoted to your phone for the identical pack</span></div>
+            <div class="stat"><b>−65g</b><span>of chips quietly removed at the same MRP</span></div>
+            <div class="stat"><b>1 tap</b><span>to turn it into a complaint for the 1915 helpline</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-row" id="opCta">
+        <a href="#drip" class="btn btn--ink">See how they do it <svg class="btn__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg></a>
+        <a href="#simulator" class="btn btn--ghost">Jump to the simulator</a>
+      </div>
+
+      <div class="stage__count" aria-hidden="true"><span data-count>01</span> / 04</div>
+      <div class="hint" id="opHint" aria-hidden="true"><span>SCROLL</span><svg viewBox="0 0 16 16"><path d="M8 2v11M3 8.5l5 5 5-5"/></svg></div>
+      <div class="bar" id="opBar" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOOK: scroll-driven "drip" story -->
+<section id="drip" class="drip-sec dark">
+  <div id="hook" class="scrolly scrolly--hook">
+    <div id="hookStage" class="stage stage--hook">
+
+      <div class="heads heads--hook" data-heads>
+        <div class="head"><div class="kicker">Same room · same store · same 6 items</div><div class="head__title">Two phones. One cart.</div></div>
+        <div class="head"><div class="kicker">Watch the checkout</div><div class="head__title">Then the fees start <span class="is-alert">dripping in.</span></div></div>
+        <div class="head"><div class="kicker">Same weather · same PIN code</div><div class="head__title">Spot the difference?</div></div>
+        <div class="head"><div class="kicker">Caught in one scan</div><div class="head__title">NoCap spots it <mark>for you.</mark></div></div>
+      </div>
+
+      <div class="phones-fit" aria-hidden="true"><div class="phones">
+        <div class="phone-col" data-side="a">
+          <div data-drops></div>
+          <div class="phone">
+            <div class="phone__notch"></div>
+            <div class="phone__title">Checkout</div>
+            <div class="phone__meta">6 items · PIN 1100XX</div>
+            <div class="pl" data-cart><span>Cart</span><span data-cart-amt>₹420</span></div>
+            <div class="phone__lines" data-lines></div>
+            <div class="phone__spacer"></div>
+            <div class="phone__total"><span>To pay</span><span data-total>₹420</span></div>
+            <div class="phone__btn">Place order</div>
+            <div class="stamp" id="hkStamp"><div class="stamp__label">OVERCHARGED</div><div class="stamp__amt" id="hkDiff">+₹77</div></div>
+          </div>
+          <div class="phone-cap"><b>Phone A</b><span>Flagship · 9% battery · regular</span></div>
+        </div>
+
+        <div class="phone-col" data-side="b">
+          <div data-drops></div>
+          <div class="phone">
+            <div class="phone__notch"></div>
+            <div class="phone__title">Checkout</div>
+            <div class="phone__meta">6 items · PIN 1100XX</div>
+            <div class="pl" data-cart><span>Cart</span><span data-cart-amt>₹420</span></div>
+            <div class="phone__lines" data-lines></div>
+            <div class="phone__spacer"></div>
+            <div class="phone__total"><span>To pay</span><span data-total>₹420</span></div>
+            <div class="phone__btn">Place order</div>
+          </div>
+          <div class="phone-cap"><b>Phone B</b><span>Mid-range · 85% battery · new</span></div>
+        </div>
+
+        <div class="beam" id="hkBeam"></div>
+      </div></div>
+
+      <div class="cta-row" id="hkCta">
+        <a href="#simulator" class="btn btn--brand">Run the 2-profile test</a>
+        <a href="#shrink" class="btn btn--ghost-dark">See what else they hide</a>
+      </div>
+
+      <div class="hint" id="hkHint" aria-hidden="true"><span>SCROLL TO CHECK OUT</span><svg viewBox="0 0 16 16"><path d="M8 2v11M3 8.5l5 5 5-5"/></svg></div>
+      <div class="bar bar--alert" id="hkBar" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE STRIP -->
+<section class="features" aria-label="What NoCap does">
+  <div class="features__grid wrap">
+    <div class="feature" data-reveal><span class="feature__num">01</span><span class="feature__title">Peer price benchmark</span><span class="feature__body">Your quote vs. a clean session in the same PIN code.</span></div>
+    <div class="feature" data-reveal><span class="feature__num">02</span><span class="feature__title">True per-100g cost</span><span class="feature__body">Normalised unit prices that expose shrinking packs.</span></div>
+    <div class="feature" data-reveal><span class="feature__num">03</span><span class="feature__title">Drip-fee radar</span><span class="feature__body">Crowd-reported hidden charges, mapped by zone.</span></div>
+    <div class="feature" data-reveal><span class="feature__num">04</span><span class="feature__title">1-click evidence</span><span class="feature__body">A timestamped complaint, ready for the 1915 helpline.</span></div>
+  </div>
+</section>
+
+<!-- SIMULATOR -->
+<section id="simulator" class="section">
+  <header class="section__head" data-reveal>
+    <div class="eyebrow">Live simulator</div>
+    <h2>Two profiles. One cart. Watch the bill move.</h2>
+    <p class="lede">Toggle each shopper’s signals. A simulated pricing algorithm rebuilds both checkouts, and the NoCap engine flags every line that changed for reasons other than the shared conditions.</p>
+  </header>
+
+  <div class="shared card" data-reveal>
+    <span class="shared__label">Shared conditions</span>
+    <span class="shared__meta">PIN 1100XX · same store · same 6 items</span>
+    <span class="grow"></span>
+    <button type="button" id="rainBtn" class="chip chip--rain" aria-pressed="true">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 13a4 4 0 1 1 1-7.9A5 5 0 0 1 16.5 8 3 3 0 0 1 15 13.9H6Z"/><path d="M7 16l-1 2M11 16l-1 2M15 16l-1 2"/></svg>
+      <span data-label>Raining: on</span>
+    </button>
+    <button type="button" id="resetBtn" class="chip">Reset demo</button>
+  </div>
+
+  <div class="sim" id="sim" data-reveal>
+    <div class="card profile" data-profile="a">
+      <div class="profile__head"><h3>Profile A</h3><span class="session">session 7f3a</span></div>
+      <div class="profile__groups" data-groups></div>
+      <div class="divider"></div>
+      <div class="bill" data-lines></div>
+      <div class="divider"></div>
+      <div class="total"><span>Checkout total</span><span class="total__amt" data-total>₹0</span></div>
+    </div>
+
+    <div class="verdict" id="verdict" aria-live="polite">
+      <div class="verdict__brand">NoCap engine</div>
+      <div class="verdict__lead" data-lead></div>
+      <div class="verdict__num" data-num>₹0</div>
+      <div class="verdict__sub" data-sub></div>
+      <div class="verdict__rule"></div>
+      <div class="verdict__flags" data-flags></div>
+      <span class="grow"></span>
+      <a href="#evidence" class="btn btn--paper">Turn this into evidence</a>
+    </div>
+
+    <div class="card profile" data-profile="b">
+      <div class="profile__head"><h3>Profile B</h3><span class="session">session c21d</span></div>
+      <div class="profile__groups" data-groups></div>
+      <div class="divider"></div>
+      <div class="bill" data-lines></div>
+      <div class="divider"></div>
+      <div class="total"><span>Checkout total</span><span class="total__amt" data-total>₹0</span></div>
+    </div>
+  </div>
+  <p class="fine">Simulated pricing rules for demonstration. In production, baselines come from clean sessions captured in the same PIN code at the same minute.</p>
+</section>
+
+<!-- SHRINKFLATION -->
+<section id="shrink" class="section">
+  <div class="shrink-top">
+    <header class="section__head" data-reveal>
+      <div class="eyebrow">The wall of shrinkflation</div>
+      <h2>The pack got smaller. The price tag didn’t.</h2>
+      <p class="lede">Everyday items ranked by Shrinkflation Severity: how much less you get for the same MRP, as a true cost per 100g or 100ml.</p>
+    </header>
+    <label class="search" data-reveal>
+      <span class="search__label">Search products</span>
+      <span class="search__field">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="5.5"/><path d="m13.2 13.2 3.8 3.8"/></svg>
+        <input type="search" id="search" placeholder="Biscuits, soap, oil…" autocomplete="off">
+      </span>
+    </label>
+  </div>
+  <div class="chips" id="cats" role="group" aria-label="Category"></div>
+  <div class="products" id="products" aria-live="polite"></div>
+  <div class="empty" id="noProducts" hidden>No items match that search yet.</div>
+  <p class="fine">Sample entries for illustration. Live data comes from tracked pack weights and MRP history.</p>
+</section>
+
+<!-- HEATMAP -->
+<section id="heatmap" class="section">
+  <header class="section__head" data-reveal>
+    <div class="eyebrow">Drip-fee heatmap</div>
+    <h2>Where the hidden fees are hitting right now.</h2>
+    <p class="lede">Crowd-reported handling, surge and platform fees by city zone. Pick a category, then tap a zone.</p>
+  </header>
+  <div class="chips" id="platforms" role="group" aria-label="Category"></div>
+  <div class="heat" data-reveal>
+    <div class="card heat__map">
+      <div class="zones" id="zones"></div>
+      <div class="legend">
+        <span>Avg hidden fee per order</span>
+        <span class="legend__scale" aria-hidden="true"><i class="h0"></i><i class="h1"></i><i class="h2"></i><i class="h3"></i><i class="h4"></i></span>
+        <span class="mono">₹0 → ₹48</span>
+      </div>
+    </div>
+    <div class="card zone-panel" id="zonePanel" aria-live="polite">
+      <div class="zone-panel__kicker"><span data-z="platform">Grocery</span> · selected zone</div>
+      <div class="zone-panel__name" data-z="name"></div>
+      <div class="zone-panel__fee"><span>Avg hidden fee per order</span><b data-z="fee"></b></div>
+      <div class="divider"></div>
+      <div class="kv"><span>Most reported</span><b data-z="top"></b></div>
+      <div class="kv"><span>Reports, last hour</span><b class="mono" data-z="reports"></b></div>
+      <div class="kv"><span>Status</span><b data-z="status"></b></div>
+    </div>
+  </div>
+  <p class="fine">Illustrative values. Zones aggregate anonymised reports; no individual checkout is ever shown.</p>
+</section>
+
+<!-- EVIDENCE -->
+<section id="evidence" class="section evidence">
+  <div class="evidence__copy" data-reveal>
+    <div class="eyebrow">1-click evidence generator</div>
+    <h2>Caught a dark pattern? File it in one tap.</h2>
+    <p class="lede">NoCap maps each finding to the CCPA’s 2023 Guidelines on Dark Patterns, such as drip pricing and basket sneaking, then exports a timestamped, annotated PDF ready for the National Consumer Helpline.</p>
+    <ol class="steps">
+      <li><span>1</span>Screenshots and fee breakdown captured with timestamps</li>
+      <li><span>2</span>Each line annotated with the pattern it matches</li>
+      <li><span>3</span>Submit on the NCH portal or call 1915</li>
+    </ol>
+  </div>
+  <div class="receipt-wrap" data-reveal>
+    <div class="receipt">
+      <div class="receipt__head">
+        <div><div class="receipt__title">Consumer complaint draft</div><div class="receipt__stamp" id="stamp"></div></div>
+        <span class="receipt__pdf">PDF</span>
+      </div>
+      <div class="divider"></div>
+      <div class="receipt__sub">Findings carried over from your simulator run</div>
+      <div class="findings" id="findings" aria-live="polite"></div>
+      <div class="divider"></div>
+      <button type="button" class="btn pdf-btn" id="pdfBtn">Generate complaint PDF</button>
+      <div class="pdf-note" id="pdfNote" hidden>Draft ready. In the full app this downloads the annotated complaint.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq" aria-labelledby="faqTitle">
+  <header class="section__head" data-reveal>
+    <div class="eyebrow">Fair questions</div>
+    <h2 id="faqTitle">No cap, here’s how it works.</h2>
+  </header>
+  <div class="faq__list" data-reveal>
+    <details>
+      <summary>Is NoCap accusing apps of fraud?</summary>
+      <p>No. It shows you exactly what changed between two checkouts and which CCPA dark-pattern guideline it resembles. Whether to file is your call.</p>
+    </details>
+    <details>
+      <summary>What data leaves my phone?</summary>
+      <p>Comparisons run on-device. Only anonymised aggregates (zone, fee type, amount) are shared to power the heatmap. No individual checkout is ever shown.</p>
+    </details>
+    <details>
+      <summary>Where does the “clean” baseline come from?</summary>
+      <p>From sessions captured in the same PIN code at the same minute, with no purchase history or device signals attached.</p>
+    </details>
+    <details>
+      <summary>What counts as shrinkflation?</summary>
+      <p>Any pack whose net weight or volume dropped while the MRP stayed flat. We rank items by how much less you get, as a true cost per 100g or 100ml.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CLOSING CTA -->
+<section class="closer" data-reveal>
+  <div class="closer__inner">
+    <div class="kicker">Stop paying the cap tax</div>
+    <p class="closer__title">No cap. Just the <mark>real price.</mark></p>
+    <div class="cta-row">
+      <a href="#simulator" class="btn btn--brand">Run the simulator</a>
+      <a href="#evidence" class="btn btn--ghost-dark">File a complaint</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__inner wrap">
+    <span><b>NoCap</b> · pricing transparency for Indian shoppers</span>
+    <span>Processed on-device · only anonymised aggregates leave your phone</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
